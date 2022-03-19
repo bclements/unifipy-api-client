@@ -2,12 +2,13 @@
 [![Build Status](https://travis-ci.org/finish06/pyunifi.svg?branch=master)](https://travis-ci.org/finish06/pyunifi)
 
 
-PyUnifi
+UnifiPy API Client
 =========
 
 ---
 A rewrite of https://github.com/unifi-hackers/unifi-lab in cleaner Python.
 Forked from https://github.com/calmh/unifi-api due to unmaintained status and rewritten to use the Requests module.
+Forked from https://github.com/finish06/pyunifi to continue expanding and updating the library due to unmaintained status.
 
 Development & Pull Request
 --------------------------
