@@ -527,6 +527,10 @@ class Controller:  # pylint: disable=R0902,R0904
         """Archive all Alerts"""
         return self._run_command("archive-all-alarms", mgr="evtmgr")
 
+    def get_backups(self):
+        """Return list of backups."""
+        return self._run_command("list-backups", mgr="backup")
+
     # TODO: Not currently supported on UDMP as it now utilizes async-backups.
     def create_backup(self, days="0"):
         """Ask controller to create a backup archive file
