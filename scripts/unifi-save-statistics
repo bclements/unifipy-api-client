@@ -3,7 +3,7 @@
 import argparse
 import time
 
-from pyunifi.controller import Controller
+from unifipy-api-client.controller import Controller
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--controller', default='unifi', help='the controller address (default "unifi")')

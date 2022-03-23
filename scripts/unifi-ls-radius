@@ -2,7 +2,7 @@
 
 import argparse
 
-from pyunifi.controller import Controller
+from unifipy-api-client.controller import Controller
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--controller', default='unifi', help='the controller address (default "unifi")')
@@ -22,17 +22,15 @@ if ssl_verify and len(args.certificate) > 0:
 
 c = Controller(args.controller, args.username, args.password, args.port, args.version, args.siteid, ssl_verify=ssl_verify)
 
-voucher = c.create_voucher(1, 1, 60, up_bandwidth=1024, down_bandwidth=1024, byte_quota=1000, note="unifi-create-voucher")
+users = c.get_radius_users()
+users.sort(key=lambda x: x['name'])
 
-code = voucher[0].get('code')
+FORMAT = '%-26s %-16s %-26s %-26s'
+print(FORMAT % ('USERNAME', 'PASSWORD', 'ID', 'SITE ID'))
+for user in users:
+    name = user["name"]
+    password = user["x_password"]
+    id = user["_id"]
+    site_id = user["site_id"]
 
-def format_code(string):
-        length_string = len(string)
-        first_length = round(length_string / 2)
-        first_half = string[0:first_length].lower()
-        second_half = string[first_length:].upper()
-        return first_half + '-' + second_half
-
-voucher_code = format_code(code)
-        
-print(voucher_code)
+    print(FORMAT % (name, password, id, site_id))

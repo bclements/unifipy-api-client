@@ -2,7 +2,7 @@
 
 import argparse
 
-from pyunifi.controller import Controller
+from unifipy-api-client.controller import Controller
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--controller', default='unifi', help='the controller address (default "unifi")')
@@ -22,20 +22,17 @@ if ssl_verify and len(args.certificate) > 0:
 
 c = Controller(args.controller, args.username, args.password, args.port, args.version, args.siteid, ssl_verify=ssl_verify)
 
-aps = c.get_aps()
-ap_names = dict([(ap['mac'], ap.get('name', '????')) for ap in aps])
-clients = c.get_clients()
-clients.sort(key=lambda x: -x.get('rssi', 100))
+voucher = c.create_voucher(1, 1, 60, up_bandwidth=1024, down_bandwidth=1024, byte_quota=1000, note="unifi-create-voucher")
 
-FORMAT = '%-16s  %18s  %-12s  %4s  %4s  %3s  %3s'
-print(FORMAT % ('NAME', 'MAC', 'AP', 'CHAN', 'RSSI', 'RX', 'TX'))
-for client in clients:
-    ap_name = ap_names.get(client.get('ap_mac', '????'), '????')
-    name = client.get('hostname') or client.get('ip', '????')
-    rssi = client.get('rssi', '????')
-    mac = client.get('mac', '????')
-    rx = int(client.get('rx_rate', 0) / 1000)
-    tx = int(client.get('tx_rate', 0) / 1000)
-    channel = client.get('channel','????')
+code = voucher[0].get('code')
 
-    print(FORMAT % (name, mac, ap_name, channel, rssi, rx, tx))
+def format_code(string):
+        length_string = len(string)
+        first_length = round(length_string / 2)
+        first_half = string[0:first_length].lower()
+        second_half = string[first_length:].upper()
+        return first_half + '-' + second_half
+
+voucher_code = format_code(code)
+        
+print(voucher_code)

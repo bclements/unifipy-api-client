@@ -12,7 +12,7 @@ from urllib3.exceptions import InsecureRequestWarning
 
 
 """For testing purposes:
-logging.basicConfig(filename='pyunifi.log', level=logging.WARN,
+logging.basicConfig(filename='unifipy-api-client', level=logging.WARN,
                     format='%(asctime)s %(message)s')
 """  # pylint: disable=W0105
 CONS_LOG = logging.getLogger(__name__)

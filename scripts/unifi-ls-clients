@@ -2,7 +2,7 @@
 
 import argparse
 
-from pyunifi.controller import Controller
+from unifipy-api-client.controller import Controller
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-c', '--controller', default='unifi', help='the controller address (default "unifi")')
@@ -22,15 +22,20 @@ if ssl_verify and len(args.certificate) > 0:
 
 c = Controller(args.controller, args.username, args.password, args.port, args.version, args.siteid, ssl_verify=ssl_verify)
 
-users = c.get_radius_users()
-users.sort(key=lambda x: x['name'])
+aps = c.get_aps()
+ap_names = dict([(ap['mac'], ap.get('name', '????')) for ap in aps])
+clients = c.get_clients()
+clients.sort(key=lambda x: -x.get('rssi', 100))
 
-FORMAT = '%-26s %-16s %-26s %-26s'
-print(FORMAT % ('USERNAME', 'PASSWORD', 'ID', 'SITE ID'))
-for user in users:
-    name = user["name"]
-    password = user["x_password"]
-    id = user["_id"]
-    site_id = user["site_id"]
+FORMAT = '%-16s  %18s  %-12s  %4s  %4s  %3s  %3s'
+print(FORMAT % ('NAME', 'MAC', 'AP', 'CHAN', 'RSSI', 'RX', 'TX'))
+for client in clients:
+    ap_name = ap_names.get(client.get('ap_mac', '????'), '????')
+    name = client.get('hostname') or client.get('ip', '????')
+    rssi = client.get('rssi', '????')
+    mac = client.get('mac', '????')
+    rx = int(client.get('rx_rate', 0) / 1000)
+    tx = int(client.get('tx_rate', 0) / 1000)
+    channel = client.get('channel','????')
 
-    print(FORMAT % (name, password, id, site_id))
+    print(FORMAT % (name, mac, ap_name, channel, rssi, rx, tx))

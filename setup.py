@@ -2,13 +2,13 @@
 
 from setuptools import setup
 
-setup(name='pyunifi',
-      version='2.21',
-      description='API for Ubiquity Networks UniFi controller',
-      author='Caleb Dunn',
-      author_email='finish.06@gmail.com',
-      url='https://github.com/finish06/unifi-api',
-      packages=['pyunifi'],
+setup(name='unifipy-api-client',
+      version='1.0',
+      description='Client SDK for Ubiquity Networks UniFi controller',
+      author='Brent Clements',
+      author_email='brent.clements@gmail.com',
+      url='https://github.com/bclements/unifipy-api-client',
+      packages=['unifipy-api-client'],
       scripts=['unifi-create-voucher', 'unifi-ls-clients'],
       classifiers=[],
       install_requires=['requests'],

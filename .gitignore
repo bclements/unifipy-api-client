@@ -4,9 +4,11 @@ dist
 Scripts/
 .pypirc
 *.pyc
-pyunifi.egg-info
+unifipy-api-client.egg-info
 pyvenv.cfg
 pip-selfcheck.json
 Lib/
 .tox/
 .vscode/
+venv/
+env/

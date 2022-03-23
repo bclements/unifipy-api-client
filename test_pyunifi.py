@@ -1,8 +1,8 @@
 from unittest import mock, TestCase, main
-from pyunifi.controller import APIError, Controller
+from unifipy-api-client.controller import APIError, Controller
 
 
-class testPyUnifi(TestCase):
+class testunifipy-api-client(TestCase):
     def test_controller_args(self):
         # Test for controller versions
         self.assertRaises(APIError, Controller, 'host',
@@ -11,9 +11,9 @@ class testPyUnifi(TestCase):
         # Test for missing arguments
         self.assertRaises(TypeError, Controller, 'username', 'password')
 
-    @mock.patch('pyunifi.controller.Controller')
-    def test_pyunifi_switch_sites(self, MockPyUnifi):
-        controller = MockPyUnifi()
+    @mock.patch('unifipy-api-client.controller.Controller')
+    def test_unifipy-api-client_switch_sites(self, Mockunifipy-api-client):
+        controller = Mockunifipy-api-client()
 
         # Test function to switch sites
         controller.switch_site.return_value = [True]
@@ -21,9 +21,9 @@ class testPyUnifi(TestCase):
         self.assertIsNotNone(response)
         self.assertIsInstance(True, bool)
 
-    @mock.patch('pyunifi.controller.Controller')
-    def test_pyunifi_get_aps(self, MockPyUnifi):
-        controller = MockPyUnifi()
+    @mock.patch('unifipy-api-client.controller.Controller')
+    def test_unifipy-api-client_get_aps(self, Mockunifipy-api-client):
+        controller = Mockunifipy-api-client()
 
         controller.get_aps.return_value = [
             {

@@ -1,14 +1,10 @@
-[![PyPI version](https://badge.fury.io/py/pyunifi.svg)](https://badge.fury.io/py/pyunifi)
-[![Build Status](https://travis-ci.org/finish06/pyunifi.svg?branch=master)](https://travis-ci.org/finish06/pyunifi)
-
-
-UnifiPy API Client
+UnifiPy Client SDK for Unifi API
 =========
 
 ---
 A rewrite of https://github.com/unifi-hackers/unifi-lab in cleaner Python.
 Forked from https://github.com/calmh/unifi-api due to unmaintained status and rewritten to use the Requests module.
-Forked from https://github.com/finish06/pyunifi to continue expanding and updating the library due to unmaintained status.
+Forked from https://github.com/finish06/unifipy-api-client to continue expanding and updating the library due to unmaintained status.
 
 Development & Pull Request
 --------------------------
@@ -17,13 +13,13 @@ Perform all pull requests against the development branch.  Pull requests against
 Install
 -------
 
-    sudo pip install -U pyunifi
+    sudo pip install -U unifipy-api-client
 
 API Example
 -----------
 
 ```python
-from pyunifi.controller import Controller
+from unifipy-api-client.controller import Controller
 c = Controller('192.168.1.99', 'admin', 'p4ssw0rd')
 for ap in c.get_aps():
 	print('AP named %s with MAC %s' % (ap.get('name'), ap['mac']))
