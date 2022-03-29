@@ -8,7 +8,7 @@ setup(name='unifipy_api_client',
       author='Brent Clements',
       author_email='brent.clements@gmail.com',
       url='https://github.com/bclements/unifipy-api-client',
-      packages=['unifipy_api_client'],      
+      packages=['unifipy_api_client'],
       classifiers=[],
       install_requires=['requests'],
       )
